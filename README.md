@@ -1,18 +1,22 @@
 # fa26-ai301-contribution
 
 
-# Contribution [#]: [Issue Title]
+# Contribution [#]: agent-tools-mcp-hub
 
-**Contribution Number:** [1 / 2 / 3]  
-**Student:** [Your Name]  
-**Issue:** [GitHub issue link]  
-**Status:** [Phase I / Phase II / Phase III / Phase IV] [In Progress / Complete]
+**Contribution Number:** 1 
+**Student:** Elias Zegeye 
+**Issue:** https://github.com/tarunjandra/agent-tools-mcp-hub/issues/101 
+**Status:** Phase I Complete
 
 ---
 
 ## Why I Chose This Issue
 
 [1-2 paragraphs explaining why this issue interests you, how it matches your skills/learning goals, what you hope to learn]
+
+I chose issue #101 "Add Fear and Greed Crypto Sentiment Index Tool (Python)" because it provides an opportunity to strengthen my Python skills while working on a project that closely aligns with my interests in both cryptocurrency and investing as a whole. I find this especially interesting because market sentiment is an important factor in understanding how investors react to changing market conditions, particularly in the crypto market.
+
+This issue involves creating a Python tool that retrieves the Crypto Fear and Greed Index, including the current sentiment score, classification, and historical trends. Working on this issue would allow me to gain practical experience with Python, APIs, data handling, and integrating a new tool into an existing AI-agent project. By implementing the tool and ensuring it meets the project's validation requirements, I would not only develop my own technical skills but also add a useful capability that could help users and AI agents better analyze market sentiment when making investment-related decisions.
 
 ---
 
