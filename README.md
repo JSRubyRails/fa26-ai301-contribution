@@ -9,7 +9,7 @@
 
 **Issue:** https://github.com/tarunjandra/agent-tools-mcp-hub/issues/101 
 
-**Status:** Phase II Complete
+**Status:** Phase III Complete
 
 ---
 
@@ -120,50 +120,62 @@ Using UMPIRE framework (adapted):
 
 ### Unit Tests
 
-- [ ] Test case 1: [Description]
-- [ ] Test case 2: [Description]
-- [ ] Test case 3: [Description]
+- No tests were in this repo, so none were added to the PR
 
 ### Integration Tests
 
-- [ ] Integration scenario 1
-- [ ] Integration scenario 2
+N/A
 
 ### Manual Testing
 
-[What you tested manually and results]
+The fear and greed crypto tool was manually tested by using an existing tool as a reference point
 
 ---
 
 ## Implementation Notes
 
-### Week [X] Progress
+### Week [2] Progress
 
-[What you built this week, challenges faced, decisions made]
+This week was spent on discovery and planning rather than writing code. I started by reading through the repository to understand the problem the issue was describing: the hub gives AI agents access to crypto price and market data, but nothing that answers how investors feel about the market. To confirm that gap was real and not just undocumented, I went through the `tools/` directory and checked the existing tool directories for anything sentiment-related. There was no crypto sentiment tool anywhere in the hub, which confirmed the issue was still valid and worth building, and I used that to sketch a plan for the tool I wanted to build.
 
-### Week [Y] Progress
 
-[Continue documenting as you work]
+### Week [3] Progress
+
+Building on the plan from Week 2, this week I implemented the tool and added the `tools/crypto_fear_and_greed_index/` directory, which contains:
+
+- **`tool.py`** — the implementation. It exposes `get_crypto_fear_and_greed_index(days=7)`, validates `days` as an integer between 1 and 30, requests that many daily data points from the Alternative.me endpoint using the `limit` parameter identified in Week 2, and returns a structured summary of the requested period: the `high` and `low` sentiment scores, the `average` score across those days, and the `most_common_rating` (one of Extreme Fear, Fear, Neutral, Greed, Extreme Greed). It also handles network failures and unexpected responses so a caller gets a message back rather than a traceback.
+- **`metadata.json`** — the tool's name, description, and parameter schema, declaring `days` as an optional integer defaulting to 7.
+- **`registry.json`** — registers the tool so the hub picks it up alongside the existing tools.
+- **`README.md`** — a parameter table for `days` and a usage example showing how to call the tool and read the returned fields.
+
+---
 
 ### Code Changes
 
-- **Files modified:** [List]
-- **Key commits:** [Links to important commits]
-- **Approach decisions:** [Why you chose certain approaches]
+- **Files modified:** Added a new folder called "tools/crypto_fear_and_greed_index/" which contained tool.py, metadata.json, registry.json, and a README.md
+
+- **Key commits:** https://github.com/shanker-codepath/agent-tools-mcp-hub/tree/fear-and-greed 
+
+- **Approach decisions:** Rather than designing the tool's layout from scratch, I built it by copying the format of an existing directory under `tools/` and following its conventions for file structure, naming, metadata fields, and error handling. Matching a tool the maintainers had already accepted meant the new directory would satisfy the repository's validation requirements and read consistently with the rest of the hub, instead of introducing a second style a reviewer would have to reconcile. Within that structure, the tool exposes a single optional `days` parameter (integer, 1–30, default 7) that maps directly onto the API's `limit` parameter. To check for potential issues, I ran python scripts/validatE_tools.py throughout development.
 
 ---
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when submitted]
+**PR Link:** https://github.com/shanker-codepath/agent-tools-mcp-hub/tree/fear-and-greed
 
-**PR Description:** [Draft or final PR description - much of the content above can be adapted]
 
-**Maintainer Feedback:**
-- [Date]: [Summary of feedback received]
-- [Date]: [How you addressed it]
+**PR Description:**
 
-**Status:** [Awaiting review / Iterating / Approved / Merged]
+The hub has tools for crypto price and market data but nothing for market sentiment, so there was no way for an agent to answer whether the market is in Extreme Fear, Greed, or somewhere in between. This PR adds `tools/crypto_fear_and_greed_index/` (tool.py, metadata.json, registry.json, README.md) wrapping the public Alternative.me Fear & Greed endpoint. It requires no API key, so the tool is zero-configuration, and its `limit` parameter maps directly onto the `days` parameter the issue asked for. Calling `get_crypto_fear_and_greed_index(days=7)` returns the `high`, `low`, and `average` sentiment scores over the requested window plus the `most_common_rating` (Extreme Fear, Fear, Neutral, Greed, or Extreme Greed); `days` is an optional integer from 1 to 30, defaulting to 7.
+
+I based the directory layout, metadata fields, and error handling on an existing tool under `tools/` so this stays consistent with the rest of the hub, and network or unexpected-response failures return a message rather than a traceback. 
+
+
+**Maintainer Feedback:** N/A
+
+
+**Status:** Solved
 
 ---
 
