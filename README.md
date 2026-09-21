@@ -9,7 +9,7 @@
 
 **Issue:** https://github.com/tarunjandra/agent-tools-mcp-hub/issues/101 
 
-**Status:** Phase III Complete
+**Status:** Phase IV Complete
 
 ---
 
@@ -183,20 +183,18 @@ I based the directory layout, metadata fields, and error handling on an existing
 
 ### Technical Skills Gained
 
-[What you learned technically]
+I got hands-on practice calling a public REST API from Python and turning its raw response into a clean, structured result. I also learned what it takes to add code to someone else's project rather than my own: reading `scripts/validate_tools.py` to find the contract my files had to satisfy, and writing `metadata.json` so the hub could discover and describe the tool automatically.
 
 ### Challenges Overcome
 
-[What was hard and how you solved it]
+The hardest part was not the API call itself but figuring out the exact structure the hub expected, since the requirements were spread across the validation script, the contributing guidelines, and the existing tool directories. I solved it by picking an already-accepted tool under `tools/` and mirroring its file layout, metadata fields, and error handling, then running `python scripts/validate_tools.py` repeatedly as I worked so I caught problems early instead of at the end.
 
 ### What I'd Do Differently Next Time
 
-[Reflection on your process]
+I would  write a few small tests for the parsing and the `days` validation even though the repo has none, since I ended up verifying the boundary cases by hand each time I changed something.
 
 ---
 
 ## Resources Used
 
-- [Link to helpful documentation]
-- [Tutorial or Stack Overflow post that helped]
-- [GitHub issues or discussions that helped]
+- Other tools that were apart of this repository as a reference to how the crypto_fear_and_greed should look and behave
